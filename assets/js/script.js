@@ -1,19 +1,57 @@
 var button = document.querySelector('.button')
 var newName = document.getElementById('cityInput');
 var cityName = document.getElementById('cityName');
+var iconsEl = document.querySelector('icons')
+var cityButton = document.querySelector('.cityStorage');
 
 
 
-button.addEventListener('click', getWeatherData()
-{cityName.innerHTML = newName.value;}
-);
+button.addEventListener('click', function()
+{cityName.innerHTML = newName.value;
+getWeatherData();
+localStorage.setItem("cityName",newName.value)
+
+var cityStorage = document.createElement('button')
+cityStorage.innerHTML = newName.value;
+
+// cityStorage.style.display = "block"
+cityStorage.style.margin = "2px"
+
+
+
+
+cityButton.appendChild(cityStorage);
+cityStorage.classList.add('btn')
+cityStorage.classList.add('btn-primary')
+cityStorage.style.marginLeft = "auto"
+cityStorage.style.marginRight = "auto"
+cityButton.style.display = "flex"
+cityButton.style.flexDirection = "column"
+cityButton.style.justifyContent = "center"
+cityStorage.style.width = "30%";
+
+var icons = document.querySelectorAll('.icons');
+icons.forEach(function(icon) {
+  icon.classList.add('bg-primary');
+})
+
+cityButton.addEventListener('click', function(){
+  if (event.target.tagName === 'BUTTON') {
+    newName.value = event.target.innerHTML;
+    cityName.innerHTML = newName.value;
+  getWeatherData()
+}})
+
+});
+
+
 
 function getWeatherData() {
   
   
   
 
-  fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appid=1efd263d108c37d3e44c050e6ab191ae')
+  fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appid=1efd263d108c37d3e44c050e6ab191ae&units=imperial')
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -35,7 +73,7 @@ function getWeatherData() {
       document.getElementById("day"+(i+1)).innerHTML = weekday[CheckDay(i)]};
 })
 
-// .catch(err => alert("Something went wrong"))
+.catch(err => alert("Something went wrong"))
 }
 
 var d = new Date();
@@ -49,17 +87,5 @@ function CheckDay(day) {
   }
 }
 
-// Add an array to store the city names
-var cities = [];
 
-// Function to add a city name to the list
-function addCityName(city) {
-  cities.push(city);
-  var cityNameElement = document.createElement("p");
-  cityNameElement.innerText = city;
-  cityNameElement.classList.add("city-name");
-  cityNameElement.addEventListener("click", function() {
-    getWeatherData(city);
-  });
-  document.body.appendChild(cityNameElement);
-}
+
