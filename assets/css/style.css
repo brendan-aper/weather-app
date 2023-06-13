@@ -1,0 +1,7 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom right, hsl(226, 39%, 32%), hsl(226, 39%, 10%));
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
