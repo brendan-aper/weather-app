@@ -5,7 +5,7 @@ var iconsEl = document.querySelector('icons')
 var cityButton = document.querySelector('.cityStorage');
 
 
-
+// event listener to trigger the main function
 button.addEventListener('click', function()
 {cityName.innerHTML = newName.value;
 getWeatherData();
@@ -19,7 +19,7 @@ cityStorage.style.margin = "2px"
 
 
 
-
+// styling with bootstrap and css
 cityButton.appendChild(cityStorage);
 cityStorage.classList.add('btn')
 cityStorage.classList.add('btn-primary')
@@ -45,7 +45,7 @@ cityButton.addEventListener('click', function(){
 });
 
 
-
+// main function pulling the weather API
 function getWeatherData() {
   
   
@@ -56,7 +56,7 @@ function getWeatherData() {
     .then(data => {
       console.log(data)
       
-
+// looping through every display card to display the correct weather data
     for (let i = 0; i < 5; i ++) {
       document.getElementById("day" + (i + 1) + "Temp").innerHTML ="Temperature: " + data['list'][i]['main']['temp'] + "°";
     }
@@ -72,10 +72,11 @@ function getWeatherData() {
     for (let i = 0; i < 5; i++) {
       document.getElementById("day"+(i+1)).innerHTML = weekday[CheckDay(i)]};
 })
-
+// error catch
 .catch(err => alert("Something went wrong"))
 }
 
+// creating an array and function for days of the week
 var d = new Date();
 var weekday = ["Sunday", "Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday"];
 
